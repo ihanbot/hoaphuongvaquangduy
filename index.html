@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,6 +30,20 @@
             boxShadow: {
               'soft': '0 0 20px rgba(0,0,0,0.05)',
               'card': '0 4px 15px rgba(0,0,0,0.08)',
+            },
+            animation: {
+              'fade-in-up': 'fadeInUp 1.2s ease-out forwards',
+              'fade-in': 'fadeIn 1.5s ease-out forwards',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              }
             }
           }
         }
@@ -43,7 +57,7 @@
       body {
         background-color: #e6e2dd;
       }
-      /* Custom Animation Utilities */
+      /* Custom Animation Utilities for Scroll */
       .fade-in-section {
         opacity: 0;
         transform: translateY(30px);
@@ -54,6 +68,11 @@
         transform: translateY(0);
       }
       
+      /* Text Shadow for Hero to ensure readability on any image */
+      .hero-text-shadow {
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+
       /* Hide scrollbar for cleaner mobile look */
       .no-scrollbar::-webkit-scrollbar {
         display: none;
@@ -80,34 +99,48 @@
     <!-- MAIN CONTAINER: Limits width to mobile-app style (480px) -->
     <div class="max-w-[480px] mx-auto bg-sand shadow-2xl overflow-hidden min-h-screen relative">
 
-        <!-- ================= HERO SECTION ================= -->
-        <header class="relative w-full h-[85vh] overflow-hidden bg-gray-200">
+        <!-- ================= HERO SECTION (UPDATED UI/UX) ================= -->
+        <header class="relative w-full h-screen overflow-hidden bg-gray-900">
             <!-- Background Image -->
             <div class="absolute inset-0">
                 <img 
                   src="hero.JPG" 
                   alt="Hoa Phượng & Quang Duy" 
-                  class="w-full h-full object-cover object-center"
+                  class="w-full h-full object-cover object-center animate-fade-in"
                 />
-                <!-- Dark Overlay -->
-                <div class="absolute inset-0 bg-black/20 mix-blend-multiply"></div>
-                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40"></div>
+                <!-- Gradient Overlay: Darker at bottom/top for text readability, clear in middle for faces -->
+                <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>
             </div>
       
-            <!-- Content -->
-            <div class="absolute inset-0 flex flex-col items-center justify-end pb-20 text-white text-center px-4 fade-in-section">
-                <p class="uppercase tracking-[0.2em] text-xs mb-4 opacity-90 font-sans">
-                  Wedding Invitation
-                </p>
-                <h1 class="font-serif text-6xl md:text-7xl leading-tight mb-4 drop-shadow-lg">
-                  Hoa Phượng<br />
-                  <span class="text-4xl align-middle mx-2">&</span><br />
-                  Quang Duy
-                </h1>
-                <div class="w-12 h-[1px] bg-white/70 mx-auto my-6"></div>
-                <div class="font-serif text-2xl tracking-widest">
-                  31 · 12 · 2025
+            <!-- Content Container: Flexbox to distribute content vertically -->
+            <div class="absolute inset-0 flex flex-col justify-between items-center py-16 px-4 text-white text-center z-10">
+                
+                <!-- TOP: Invitation Label -->
+                <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <p class="uppercase tracking-[0.3em] text-[10px] font-medium font-sans border border-white/30 px-4 py-1.5 rounded-full backdrop-blur-[2px]">
+                      Wedding Invitation
+                    </p>
                 </div>
+
+                <!-- MIDDLE: Names (Centerpiece) -->
+                <div class="flex flex-col items-center justify-center animate-fade-in-up" style="animation-delay: 0.5s;">
+                    <h1 class="font-serif text-[3.5rem] leading-[1.1] md:text-7xl font-normal hero-text-shadow tracking-wide">
+                      Hoa Phượng
+                    </h1>
+                    <span class="font-serif text-3xl my-2 italic text-white/90 font-light">&</span>
+                    <h1 class="font-serif text-[3.5rem] leading-[1.1] md:text-7xl font-normal hero-text-shadow tracking-wide">
+                      Quang Duy
+                    </h1>
+                </div>
+
+                <!-- BOTTOM: Date -->
+                <div class="animate-fade-in-up" style="animation-delay: 0.8s;">
+                    <div class="w-16 h-[1px] bg-white/60 mx-auto mb-4"></div>
+                    <div class="font-serif text-2xl tracking-[0.2em] font-light hero-text-shadow">
+                      31 · 12 · 2025
+                    </div>
+                </div>
+
             </div>
         </header>
 
